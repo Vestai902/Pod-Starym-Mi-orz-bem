@@ -1,0 +1,82 @@
+body {
+  background-color: #1a1a1a;
+}
+
+#cont{
+  width: 1000px;
+  margin: auto;
+  padding-top:35px;
+}
+
+h1{
+	font-size: 50px;
+
+}
+
+#rejestracja {
+  font-family: Arial;
+  float: left;
+  text-align: center;
+  width: 1000px;
+  background-color: white;
+  padding:20px;
+  border-radius: 5px;
+}
+
+[type=text], [type='email'], [type='tel'], [type='password']{
+  display: block;
+  margin: auto;
+  border: 0;
+  border-bottom: 1px solid rgba(0,0,0,.4); 
+  margin-bottom: 10px;
+  width: 85%;
+  height: 45px;
+  line-height: 45px;
+  font-size: 15px;
+  color: rgba(0,0,0,.4);
+}
+
+[type='text']:focus,[type='email']:focus, [type='tel']:focus, [type='password']:focus {
+  outline: none;
+  border-color: black;
+}
+
+ 
+
+
+[type=submit] {
+  margin-top: 25px;
+  width: 85%;
+  background-color: #262626;
+  border-radius: 8px;
+  height: 50px;
+  color: white;
+  border: 0;
+  font-size: 20px;
+}
+
+.s1{
+	width:85%;
+	margin: auto;
+	color: rgba(0,0,0,.4);
+	display:block;
+	margin-bottom: 10px;
+	text-align: left;
+}
+p{
+	font-size:10px;
+	color:red;
+}
+
+#topbar{
+	height:65px;
+	background-color:grey;
+}
+#logo{
+  text-align:center;
+  float:left;
+  font-size:28px;
+  font-family:'MF';
+  width:25%;
+  cursor:pointer;
+}
