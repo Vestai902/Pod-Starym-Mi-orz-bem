@@ -4,13 +4,11 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Dodawanie</title>
-  <link rel="stylesheet" href="dodawanie.css">
+  <title>Pod Starym Miłorzębem</title>
+  <link rel="stylesheet" href="dodPrac.css">
 </head>
 <body>
-
-
-<div id="topbar"><div id="logo">Pod Starym<br>Miłorzębem</div>
+	<div id="topbar"><div id="logo">Pod Starym<br>Miłorzębem</div>
 	<div id="wyszukaj"><form method="get" action="wyszukiwanie.jsp"><input name="search" type="text" id="te" placeholder="Czego szukasz?"><button name="bt1" class="bt" >&#x2315;</button>	
 
 	</form></div>
@@ -19,10 +17,7 @@
 		<%
 		Integer rank=(Integer)session.getAttribute("rank");
 		String user=(String)session.getAttribute("usname");
-		if(rank==2||rank==null){response.sendRedirect("index.jsp");}
-		if(user==null){
-			response.sendRedirect("index.jsp");
-		}
+		if(rank==null||rank!=3){response.sendRedirect("index.jsp");}
 		if(user!=null){
 		%>
 		<div class="w1">
@@ -59,6 +54,7 @@
 		</div>
 		</div>
 		<script>
+
 		function myFunction() {
 		document.getElementById("mDropd").classList.toggle("show");
 			}
@@ -101,69 +97,42 @@
 		
 	</div></div>
   <div id="dodawanie">
-  <div id="pod">Dodawanie Produktu</div>
-<form method="POST" action="upload" enctype="multipart/form-data" >
-	<input type="text" name="nazwa" placeholder="Nazwa produktu:" required/>
-	<input type="text" name="opis" placeholder="Opis produktu:" required/>
-	<%@ page import="java.io.*,java.sql.Connection,java.sql.DriverManager,javax.servlet.*,java.sql.*,java.io.IOException" %>
-	Kategoria:
-	<select name="kat" required>
-	<option value="">Wybierz kategorie</option>
-	<%
-	String url = "jdbc:postgresql://localhost:5432/shop";
-    String us = "postgres";
-    String password = "admin";
-    Connection conn = null;
-	String a1,a2;
 	
-	try{
-		
-		conn = DriverManager.getConnection(url, us, password);
-	}catch(Exception exp){
-		System.out.println("err");
-		}
+	<div id="pod">Zbanuj użytkownika:</div>
+	
+    <form method="post" action="ban">
+	
+       <input type="text" name="nazwa_uzytkownika" placeholder="Nazwa użytkownika:" required/>
 
-        if (conn != null) {
-        	String SQL = "SELECT * FROM categories";
-    		try{
-    	            Statement stmt = conn.createStatement();
-    	            ResultSet rs = stmt.executeQuery(SQL); 
-    	            while (rs.next()) {
-    	            	a2=rs.getString("name");
-    	            	a1=rs.getString("category_id");
-    	            	%>
-    	            	<option value="<%= a1 %>"> <%= a2 %> </option>
-    	           <% 
-    	            }
-    		}catch(Exception exp){
-    			System.out.println("g1");
-    			}
-        } %>
-    	</select><br/>
-	<label for="ilosc">Ilość produktu (0-1000):</label>
-	<input type="number" id="ilosc" name="ilosc" min="0" max="1000" required><br/>
-       <label for="cena">Cena produktu:</label>
-	<input type="number" id="cena" name="cena" required><br/>
-            Zdjęcia:
-            <input type="file" name="file0" id="file" accept=".png,.jpg" required/>
-            <div id="f"></div>
-        <div id="d">Dodaj kolejne zdjęcie</div>
-            <input type="submit" value="Dodaj Produkt" name="upload" id="upload" required/>
-        </form>
-	</div>
+
+	<p>${set1}</p>
+
+       <button type="submit" class="btn" name="ban_u">Zmień</button>
+    </form>
+	<br>
+	<h2 style="color:red;">${prdod}</h2>
+  </div>
+   <div id="dodawanie">
+	
+	<div id="pod">Odbanuj użytkownika:</div>
+	
+    <form method="post" action="ban">
+	
+       <input type="text" name="nazwa_uzytkownika1" placeholder="Nazwa użytkownika:" required/>
+
+
+	<p>${set2}</p>
+
+       <button type="submit" class="btn" name="uban_u">Zmień</button>
+    </form>
+	<br>
+	<h2 style="color:red;">${prdod}</h2>
+  </div>
   <script>
-  let i=1;
 	document.getElementById("logo").addEventListener("click", toM);
 
 	function toM() {
 	window.location.href="index.jsp";
-	}
-	
-	document.getElementById("d").addEventListener("click", add);
-
-	function add() {
-		document.getElementById("f").innerHTML+='<input type="file" name="file'+i+'" id="file" required/>';
-		i+=1;
 	}
 	</script>
 </body>

@@ -17,32 +17,45 @@
 	<div id="user">
 	
 		<%
+		if((String)session.getAttribute("usname")==null){response.sendRedirect("index.jsp");return;}
+
+		Integer rank=(Integer)session.getAttribute("rank");
 		String user=(String)session.getAttribute("usname");
-		Integer userid=(Integer)session.getAttribute("userid");
-		if(userid==null){
-			response.sendRedirect("index.jsp");
-			return;
-		}
+		
 		if(user!=null){
 		%>
 		<div class="w1">
-			<a href="koszyk.jsp">
+		<a href="koszyk.jsp">
 		<div class="cartt"></div></a>
 		</div>
 		<div class="w1">
-	
 		<div class="dropd">
 		<div onclick="myFunction()" class="drop">
 		<%=user %>
 		</div>
 		<div id="mDropd" class="dropd-cont">
-		<a href="histo.jsp">Zamówienia</a>
-		<a href="add.jsp">Dodaj</a>
+		<%if(rank==2){ %>
+		<a href="historiazamowien.jsp">Zamówienia</a>
+		<a href="aktualizujdane.jsp">Zmiana danych osobowych</a>
 		
 		<a href="logout?n=1">Wyloguj</a>
-		</div>
-		</div>
+		<%}else if(rank==4||rank==3){ %>
+		<a href="add.jsp">Dodaj nowy produkt</a>
+		<a href="dodajkategorie.jsp">Dodaj kategorie</a>
+		<a href="itemmgmt.jsp">Zarządzaj produktami</a>
+		<a href="zamowieniazr.jsp">Zamówienia użytkownicy zarejestrowani</a>
+		<a href="zamowienianzr.jsp">Zamówienia użytkownicy niezarejestrowani</a>
+		<a href="zgloszenia.jsp">Zgłoszone komentarze</a>
+		 <% if(rank==3){%>
+		 <a href="dodajpracownika.jsp">Dodaj pracownika</a>
+		<a href="zmienhaslo.jsp">Zmień hasło użytkownika</a>
+		<a href="ban.jsp">Zbanuj/Odbanuj użytkownika</a>
+		 <%} %>
+		<a href="logout?n=1">Wyloguj</a>
 		
+		<%} %>
+		</div>
+		</div>
 		</div>
 		<script>
 

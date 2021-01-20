@@ -67,7 +67,7 @@ public class unOrderServlet extends HttpServlet {
         	         
         				
         					session.invalidate();  
-        	        		response.sendRedirect("index.jsp");
+        	        		response.sendRedirect("end.jsp");
         	            }else {
         	            	response.sendRedirect("index.jsp");
         	            }

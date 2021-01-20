@@ -10,7 +10,7 @@
 <body>
 <div id="topbar"><div id="logo">Pod Starym<br>Miłorzębem</div></div>
 <div id="cont">
-
+<%if((String)session.getAttribute("usname")!=null){response.sendRedirect("index.jsp");return;} %>
   <div id="rejestracja">
 	<h1>Rejestracja</h1>
     <form method="post" action="rej">

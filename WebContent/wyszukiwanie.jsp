@@ -17,8 +17,9 @@
 	<div id="user">
 	
 		<%
-		
+		Integer rank=(Integer)session.getAttribute("rank");
 		String user=(String)session.getAttribute("usname");
+		
 		if(user!=null){
 		%>
 		<div class="w1">
@@ -31,10 +32,26 @@
 		<%=user %>
 		</div>
 		<div id="mDropd" class="dropd-cont">
-		<a href="histo.jsp">Zamówienia</a>
-		<a href="add.jsp">Dodaj</a>
+		<%if(rank==2){ %>
+		<a href="historiazamowien.jsp">Zamówienia</a>
+		<a href="aktualizujdane.jsp">Zmiana danych osobowych</a>
 		
 		<a href="logout?n=1">Wyloguj</a>
+		<%}else if(rank==4||rank==3){ %>
+		<a href="add.jsp">Dodaj nowy produkt</a>
+		<a href="dodajkategorie.jsp">Dodaj kategorie</a>
+		<a href="itemmgmt.jsp">Zarządzaj produktami</a>
+		<a href="zamowieniazr.jsp">Zamówienia użytkownicy zarejestrowani</a>
+		<a href="zamowienianzr.jsp">Zamówienia użytkownicy niezarejestrowani</a>
+		<a href="zgloszenia.jsp">Zgłoszone komentarze</a>
+		 <% if(rank==3){%>
+		 <a href="dodajpracownika.jsp">Dodaj pracownika</a>
+		<a href="zmienhaslo.jsp">Zmień hasło użytkownika</a>
+		<a href="ban.jsp">Zbanuj/Odbanuj użytkownika</a>
+		 <%} %>
+		<a href="logout?n=1">Wyloguj</a>
+		
+		<%} %>
 		</div>
 		</div>
 		</div>
@@ -193,7 +210,7 @@
 		<div class="prc">Cena: <%=price%> zł</div>
 		<div class="btnn">
 			<a class="mB" href="show.jsp?o=<%=p_id%>">Zobacz</a>
-			<a class="mB2" href="">Usuń</a>
+			
 		</div>
 		</div>
 		</div>

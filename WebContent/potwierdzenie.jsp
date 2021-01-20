@@ -17,26 +17,43 @@
 	<div id="user">
 	
 		<%
+		Integer rank=(Integer)session.getAttribute("rank");
 		String user=(String)session.getAttribute("usname");
+		
 		if(user!=null){
 		%>
 		<div class="w1">
-			<div class="cartt"></div>
+		<a href="koszyk.jsp">
+		<div class="cartt"></div></a>
 		</div>
 		<div class="w1">
-	
 		<div class="dropd">
 		<div onclick="myFunction()" class="drop">
 		<%=user %>
 		</div>
 		<div id="mDropd" class="dropd-cont">
-		<a href="histo.jsp">Zamówienia</a>
-		<a href="add.jsp">Dodaj</a>
+		<%if(rank==2){ %>
+		<a href="historiazamowien.jsp">Zamówienia</a>
+		<a href="aktualizujdane.jsp">Zmiana danych osobowych</a>
 		
 		<a href="logout?n=1">Wyloguj</a>
-		</div>
-		</div>
+		<%}else if(rank==4||rank==3){ %>
+		<a href="add.jsp">Dodaj nowy produkt</a>
+		<a href="dodajkategorie.jsp">Dodaj kategorie</a>
+		<a href="itemmgmt.jsp">Zarządzaj produktami</a>
+		<a href="zamowieniazr.jsp">Zamówienia użytkownicy zarejestrowani</a>
+		<a href="zamowienianzr.jsp">Zamówienia użytkownicy niezarejestrowani</a>
+		<a href="zgloszenia.jsp">Zgłoszone komentarze</a>
+		 <% if(rank==3){%>
+		 <a href="dodajpracownika.jsp">Dodaj pracownika</a>
+		<a href="zmienhaslo.jsp">Zmień hasło użytkownika</a>
+		<a href="ban.jsp">Zbanuj/Odbanuj użytkownika</a>
+		 <%} %>
+		<a href="logout?n=1">Wyloguj</a>
 		
+		<%} %>
+		</div>
+		</div>
 		</div>
 		<script>
 
@@ -77,13 +94,16 @@
 		window.location.href="logowanie.jsp";
 		}
 		</script>
-		<%} %>
+		<%}
+		if((String)session.getAttribute("fName")==null){response.sendRedirect("index.jsp");return;}
+		
+		%>
 		
 		
 	</div></div>
 	<div id="cont">
 	<h1>Dane do dostawy:</h1>
-	<h4><%=(String)session.getAttribute("fName")%> <%=(String)session.getAttribute("lName")%> <%=(String)session.getAttribute("street")%> <%=(String)session.getAttribute("zip")%> <%=(String)session.getAttribute("city")%></h4>
+	<h4>Imię: <%=(String)session.getAttribute("fName")%> Nazwisko: <%=(String)session.getAttribute("lName")%> Miejscowość: <%=(String)session.getAttribute("street")%> <%=(String)session.getAttribute("zip")%> <%=(String)session.getAttribute("city")%></h4>
 
 	
 	<h1>Podsumowanie</h1>
@@ -127,6 +147,7 @@
  			response.sendRedirect("index.jsp");
  			}
 String delivery_id = request.getParameter("slct"); 
+if(delivery_id==null){response.sendRedirect("index.jsp");return;}
     int id=0;
     String name="";
     int price=0;

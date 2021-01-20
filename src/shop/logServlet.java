@@ -21,7 +21,7 @@ public class logServlet extends HttpServlet {
 		String pwd = request.getParameter("haslo");
 		int userid=0;
 		int total=0;
-		int rank=0;
+		int r=0;
 		String t="";
 		ArrayList<String[]> cart = new ArrayList<String[]>();
 		HttpSession ses=request.getSession();
@@ -42,12 +42,18 @@ public class logServlet extends HttpServlet {
             	String SQL = "SELECT * FROM accounts WHERE username='"+user1+"' AND password='"+t+"'";
         		int c=0;
         		try{
+        			
         	            Statement stmt = conn.createStatement();
         	            ResultSet rs = stmt.executeQuery(SQL); 
         	            while (rs.next()) {
+        	            	if(rs.getBoolean("ban")==true) {
+        	            		request.setAttribute("err","U¿ytkownik zbanowany");
+        	        			request.getRequestDispatcher("logowanie.jsp").forward(request,response);
+
+        	            	}
         	            if(rs.getString("username").equals(user1)){
         	            	userid=rs.getInt("user_id");
-        	            	rank=rs.getInt("account_type");
+        	            	r=rs.getInt("account_type");
         	            	
         	            	c=1;
         	            }}
@@ -61,7 +67,7 @@ public class logServlet extends HttpServlet {
         	        		session.setAttribute("cart",cart);
         	        		session.setAttribute("userid",userid);
         	        		session.setAttribute("total",total);
-        	        		session.setAttribute("rank",rank);
+        	        		session.setAttribute("rank",r);
         	        		response.sendRedirect("index.jsp");
         	            }else {
         	            	request.setAttribute("err","Niepoprawne dane logowania!");

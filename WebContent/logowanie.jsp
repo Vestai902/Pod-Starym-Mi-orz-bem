@@ -10,6 +10,7 @@
 <body>
 <div id="topbar"><div id="logo">Pod Starym<br>Miłorzębem</div></div>
   <div id="logowanie">
+	<%if((String)session.getAttribute("usname")!=null){response.sendRedirect("index.jsp");return;} %>
 	
 	<div id="pod">Logowanie</div>
 	

@@ -84,7 +84,7 @@ public class submitOrderServlet extends HttpServlet {
         	        		session.setAttribute("cart",cart);
         	        		session.setAttribute("total",null);
         	        		session.setAttribute("delivery",null);
-        	        		response.sendRedirect("index.jsp");
+        	        		response.sendRedirect("end.jsp");
         	            }else {
         	            	response.sendRedirect("index.jsp");
         	            }
